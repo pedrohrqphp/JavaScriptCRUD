@@ -1,21 +1,24 @@
 const connection = require('./connection')
 
-let sql = 'SELECT * FROM Personagem WHERE id_personagem = ?'
-let id = 2
-
-connection.query(sql, id, function(error, results, fields) {
-    if(error) throw error
-
-    if(results == 0) {
-        console.log("Nenhum personagem encontrado")
-        return
-    }
-
-    let personagem = results[0]
+function select(id) {
+    let sql = 'SELECT * FROM Jogo WHERE id_jogo = ?'
     
-    console.log('Id:\t\t' + personagem.id_personagem)
-    console.log('Nome:\t' + personagem.nm_personagem)
-    console.log('Tipo:\t' + personagem.tipo_personagem)
-})
+    connection.query(sql, id, function(error, results, fields) {
+        if(error) throw error
+    
+        if(results == 0) {
+            console.log('Nenhum dado encontrado')
+            return
+        }
+    
+        const dados = results[0]
+    
+        console.log('ID: ' + dados.id_jogo)
+        console.log('NOME: ' + dados.nm_jogo)
+        console.log('TIPO: ' + dados.tipo_jogo)
+    })
+    
+    connection.end()
+}
 
-connection.end()
+exports.select = select

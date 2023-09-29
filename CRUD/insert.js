@@ -1,12 +1,16 @@
 const connection = require('./connection')
 
-let sql = 'INSERT INTO Personagem SET ?'
-let dados = {nm_personagem: 'Loki', tipo_personagem: 'Vilão'}
+function insert(nome, tipo){
 
-connection.query(sql, dados, function(error, results, fields) {
-    if (error) throw error
+    let sql = 'INSERT INTO Jogo SET ?';
+    let dados = {nm_jogo: nome, tipo_jogo: tipo}
 
-    console.log('Personagem adicionado')
-})
+    connection.query(sql, dados, function(error, results, fields) {
+      if (error)throw error
+      console.log('Registro adicionado com sucesso.');
+    });
 
-connection.end()
+    connection.end()
+}
+
+exports.insert = insert

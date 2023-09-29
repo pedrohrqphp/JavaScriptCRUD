@@ -1,13 +1,14 @@
-function DELETE(id) {
-    const connection = require('./connection')
+const connection = require('./connection')
 
-    let sql = 'DELETE FROM Personagem WHERE id_personagem = ?'
-    let id = 2
+function del(id) {
+    const sql = 'DELETE FROM Jogo WHERE id_jogo = ?'
 
-    connection.query(sql, id, function(error, results, fields) {
-        if(error) throw error
-        console.log('Personagem deletado com sucesso')
-    })
+    connection.query(sql, id, (error, results) => {
+      if (error) throw error
+      console.log('Registro apagado com sucesso.');
+    });
 
     connection.end()
 }
+
+exports.del = del
